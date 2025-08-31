@@ -19,6 +19,17 @@ app.use('/api/user', userRoute)
 app.use('/api/auth',authRouter)
 
 
+
+
+
+
+
+
+
+
+
+
+//error middleware for error handling
 app.use((err:any , req:Request , res:Response, next:NextFunction) => {
 const statuscode = err.statuscode || 500;
 const message = err.message || 'internal server errror';
@@ -29,17 +40,6 @@ message,
 statuscode
 });
 });
-
-
-
-
-
-
-
-
-
-
-
 // Start server
 const PORT = 5000;
 app.listen(PORT, () => {
