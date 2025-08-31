@@ -1,7 +1,8 @@
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import mongoose from 'mongoose';
 import userRoute from './routes/user.route'
 import authRouter from './routes/auth.route';
+
 
 const app = express();
 
@@ -18,7 +19,16 @@ app.use('/api/user', userRoute)
 app.use('/api/auth',authRouter)
 
 
+app.use((err:any , req:Request , res:Response, next:NextFunction) => {
+const statuscode = err.statuscode || 500;
+const message = err.message || 'internal server errror';
 
+return res.status(statuscode).json({
+sucess :false,
+message,
+statuscode
+});
+});
 
 
 

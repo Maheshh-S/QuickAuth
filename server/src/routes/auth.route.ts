@@ -3,7 +3,7 @@ import User from "../models/userModel";
 import bcryptjs from 'bcryptjs'
 const router = express.Router();
 
-router.post("/signup", async (req: Request, res: Response) => {
+router.post("/signup", async (req: Request, res: Response , next) => {
     try {
         const {username , email, password} = req.body;
 
@@ -25,10 +25,7 @@ const hasedPass = bcryptjs.hashSync(password,10);
         })
 
     } catch (error) {
-        res.status(500).json({
-            error:"user is already created"
-        })
-        
+        next(error)  
     }
 
 
