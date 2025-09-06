@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 interface FormData { 
   username: string;
@@ -9,7 +9,7 @@ interface FormData {
 
 export default function Signup() {
   // ✅ useState should be at the top
-
+const navigate = useNavigate();
   const [loading,setLoading] = useState(false);
   const[error , setError] = useState(false);
   const [formData, setFormData] = useState<FormData>({
@@ -50,7 +50,8 @@ export default function Signup() {
         setError(true);
         return;
       }
-     setError(false);
+      setError(false);
+     navigate('/signin')
     } catch (error) {
       setLoading(false);
       setError(true);

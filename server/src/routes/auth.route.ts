@@ -65,9 +65,9 @@ const{password: hasedPass, ...rest} = validUser._doc;
         );
 
         res.cookie("access_token", token, 
-            {httpOnly: true},
-            
-        );
+            {httpOnly: true,
+            maxAge : 60 * 60 * 1000
+    });
 
         res.status(200).json({
             message : "LoginSuccessfull",
